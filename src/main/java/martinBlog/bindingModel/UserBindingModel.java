@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
  * Created by Martin on 4/18/2017.
  */
 public class UserBindingModel {
+
     @NotNull
     private String email;
 

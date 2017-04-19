@@ -22,11 +22,14 @@ public class User {
 
     private Set<Role> roles;
 
+    private Set<Article> articles;
+
     public User(String email, String fullName, String password) {
         this.email = email;
         this.fullName = fullName;
         this.password = password;
 
+        this.articles = new HashSet<>();
         this.roles = new HashSet<>();
     }
 
@@ -69,7 +72,6 @@ public class User {
         this.password = password;
     }
 
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles")
     public Set<Role> getRoles() {
@@ -82,5 +84,14 @@ public class User {
 
     public void addRole(Role role) {
         this.roles.add(role);
+    }
+
+    @OneToMany(mappedBy = "author")
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
     }
 }
