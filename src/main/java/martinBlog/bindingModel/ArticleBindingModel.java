@@ -1,5 +1,7 @@
 package martinBlog.bindingModel;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -12,6 +14,16 @@ public class ArticleBindingModel {
 
     @NotNull
     private String content;
+
+    private MultipartFile image;
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
 
     public String getTitle() {
         return title;

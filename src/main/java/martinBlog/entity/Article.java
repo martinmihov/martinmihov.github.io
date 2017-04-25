@@ -1,6 +1,7 @@
 package martinBlog.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Martin on 4/19/2017.
@@ -17,6 +18,32 @@ public class Article {
     private String content;
 
     private User author;
+
+    private String imagePath;
+
+    private Date date;
+
+    public Article(String title, String content, User author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+
+        this.date = new Date();
+    }
+
+    public Article() {
+        this.date = new Date();
+    }
+
+    public Article(String title, String content, User author, String imagePath) {
+
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.imagePath = imagePath;
+
+        this.date = new Date();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,13 +83,22 @@ public class Article {
         this.author = author;
     }
 
-    public Article(String title, String content, User author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
+    @Column(name = "date", nullable = true)
+    public Date getDate() {
+        return date;
     }
 
-    public Article() {}
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     @Transient
     public String getSummary(){

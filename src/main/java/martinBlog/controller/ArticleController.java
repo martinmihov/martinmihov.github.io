@@ -15,6 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by Martin on 4/19/2017.
@@ -39,16 +45,47 @@ public class ArticleController {
 
     @PostMapping("/article/create")
     @PreAuthorize("isAuthenticated()")
-    public String createProcess(ArticleBindingModel articleBindingModel){
+    public String createProcess(ArticleBindingModel articleBindingModel, @RequestParam("image")MultipartFile image){
         UserDetails user = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
 
         User userEntity = this.userRepository.findByEmail(user.getUsername());
 
+
+        String dbImagePath = null;
+
+        String[] allowedContentTypes = {
+                "image/png",
+                "image/jpg",
+                "image/jpeg"
+        };
+
+        boolean isContentTypeAllowed = Arrays.asList(allowedContentTypes)
+                .contains(articleBindingModel.getImage().getContentType());
+
+        if (isContentTypeAllowed) {
+
+            String imagesPath = "\\src\\main\\resources\\static\\images\\";
+            String imagePathRoot = System.getProperty("user.dir");
+            String imageSaveDirectory = imagePathRoot + imagesPath;
+            String filename = articleBindingModel.getImage().getOriginalFilename();
+            String savePath = imageSaveDirectory + filename;
+            File imageFile = new File(savePath);
+            try {
+                articleBindingModel.getImage().transferTo(imageFile);
+                dbImagePath = "/images/" + filename;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
         Article articleEntity = new Article(
                 articleBindingModel.getTitle(),
                 articleBindingModel.getContent(),
-                userEntity
+                userEntity,
+                dbImagePath
         );
 
         this.articleRepository.saveAndFlush(articleEntity);

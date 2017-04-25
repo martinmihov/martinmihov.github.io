@@ -34,7 +34,10 @@ public class User {
         this.roles = new HashSet<>();
     }
 
-    public User() {}
+    public User() {
+        this.articles = new HashSet<>();
+        this.roles = new HashSet<>();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
