@@ -3,6 +3,7 @@ package martinBlog.bindingModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by Martin on 4/19/2017.
@@ -16,6 +17,16 @@ public class ArticleBindingModel {
     private String content;
 
     private MultipartFile image;
+
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public MultipartFile getImage() {
         return image;

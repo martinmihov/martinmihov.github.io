@@ -57,7 +57,8 @@ public class ArticleController {
         String[] allowedContentTypes = {
                 "image/png",
                 "image/jpg",
-                "image/jpeg"
+                "image/jpeg",
+                "image/gif"
         };
 
         boolean isContentTypeAllowed = Arrays.asList(allowedContentTypes)
@@ -79,13 +80,12 @@ public class ArticleController {
             }
         }
 
-
-
         Article articleEntity = new Article(
                 articleBindingModel.getTitle(),
                 articleBindingModel.getContent(),
                 userEntity,
-                dbImagePath
+                dbImagePath,
+                articleBindingModel.getDate()
         );
 
         this.articleRepository.saveAndFlush(articleEntity);
@@ -94,6 +94,7 @@ public class ArticleController {
     }
 
     @GetMapping("/article/{id}")
+    @PreAuthorize("isAuthenticated()")
     public String details(Model model, @PathVariable Integer id) {
         if (!this.articleRepository.exists(id)) {
             return "redirect:/";

@@ -8,7 +8,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = " articles")
+@Table(name = "articles")
 public class Article {
 
     private Integer id;
@@ -21,7 +21,9 @@ public class Article {
 
     private String imagePath;
 
-    private Date date;
+    private Date date = new Date();
+
+    private Integer pageView;
 
     public Article(String title, String content, User author) {
         this.title = title;
@@ -32,16 +34,24 @@ public class Article {
     }
 
     public Article() {
-        this.date = new Date();
+
     }
 
-    public Article(String title, String content, User author, String imagePath) {
+    /*  public Article(String title, String content, User author, String imagePath) {
 
         this.title = title;
         this.content = content;
         this.author = author;
         this.imagePath = imagePath;
 
+        this.date = new Date();
+    } */
+
+    public Article(String title, String content, User author, String imagePath, Date date) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.imagePath = imagePath;
         this.date = new Date();
     }
 
@@ -83,7 +93,7 @@ public class Article {
         this.author = author;
     }
 
-    @Column(name = "date", nullable = true)
+    @Column(name = "date")
     public Date getDate() {
         return date;
     }
@@ -98,6 +108,15 @@ public class Article {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    @Column(name="pageView", nullable = true)
+    public Integer getPageView() {
+        return pageView;
+    }
+
+    public void setPageView(Integer pageView) {
+        this.pageView = pageView;
     }
 
     @Transient

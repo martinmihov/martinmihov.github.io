@@ -7056,3 +7056,21 @@ article .author  {
 article .author  {
   content: '\2014 \00A0';
 }
+
+#left-sides-scrolling {
+  float: left;
+  width: 78%;
+  background: inherit;
+  height: 100%;
+  overflow-y: auto;
+}
+#right-side-scrolling {
+  position: fixed;
+  top: 111px;
+  right: 50px;
+  border-radius: 25px;
+  border: 3px solid #95a5a6;
+  float: left;
+  width: 22%;
+  background: inherit;
+}
