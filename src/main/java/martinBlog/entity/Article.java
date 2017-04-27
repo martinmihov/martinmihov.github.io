@@ -110,7 +110,7 @@ public class Article {
         this.imagePath = imagePath;
     }
 
-    @Column(name="pageView", nullable = true)
+    @Column(name="page_view")
     public Integer getPageView() {
         return pageView;
     }
@@ -118,6 +118,9 @@ public class Article {
     public void setPageView(Integer pageView) {
         this.pageView = pageView;
     }
+
+
+//    public Integer getCounter(){ return this.getPageView(); }
 
     @Transient
     public String getSummary(){

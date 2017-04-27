@@ -12,15 +12,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by Martin on 4/19/2017.
@@ -193,6 +193,20 @@ public class ArticleController {
         this.articleRepository.delete(article);
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value="/article/count/{article_id}", method=GET)
+    @PreAuthorize("isAuthenticated()")
+    @ResponseBody
+    public String count(@PathVariable Integer article_id) {
+
+        Article article = this.articleRepository.findOne(article_id);
+
+        article.setPageView(article.getPageView() + 1);
+
+        this.articleRepository.saveAndFlush(article);
+
+        return "" + article.getPageView();
     }
 
     private boolean isUserAuthorOrAdmin(Article article) {
