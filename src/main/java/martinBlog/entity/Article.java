@@ -43,6 +43,7 @@ public class Article {
         this.author = author;
         this.imagePath = imagePath;
         this.date = new Date();
+        this.pageView = 0;
     }
 
     @Id
@@ -108,6 +109,7 @@ public class Article {
     public void setPageView(Integer pageView) {
         this.pageView = pageView;
     }
+
     @Transient
     public String getSummary(){
         return this.getContent().substring(0, this.getContent().length() / 2) + "...";

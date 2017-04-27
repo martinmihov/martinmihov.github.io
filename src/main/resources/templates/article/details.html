@@ -2,9 +2,9 @@
     <div class="container body-content">
         <div class="row">
             <div class="col-md-12">
+
                 <script>
                     window.onload = function(){
-//                        console.log("load");
                         var article_id =  $("#article_id").val();
 
                         $.ajax({
@@ -17,7 +17,11 @@
                         });
                     }
                 </script>
+
                 <article>
+
+                    <img th:if="${article.imagePath} != null" th:src="${article.imagePath}" width="400px" height="250px" alt="Article Image" />
+
                     <header>
                         <h2 th:text="${article.title}"></h2>
                     </header>
@@ -27,11 +31,7 @@
                     <br/>
                     <p th:text="${article.content}"> </p>
 
-                    <img th:if="${article.imagePath} != null" th:src="${article.imagePath}" width="250px" height="250px" alt="Article Image" />
-
                     <small class="author" th:text="${article.author.fullName}"></small>
-
-                    <!--<div style="text-align:center;"><script type="text/javascript" src="http://services.webestools.com/cpt_pages_views/54197-13-1.js"></script></div><a href="http://www.webestools.com/" style="display:block;text-align:center;" title="Tools services webmasters counters generators scripts tutorials free"><img src="http://www.webestools.com/images/ban03.gif" alt="Tools services webmasters counters generators scripts tutorials free" /></a>-->
 
                     <small class="pull-left"><span id="page-view" th:text="${article.pageView}"></span> views</small>
 
@@ -44,10 +44,12 @@
 
                     <footer>
                         <div class="pull-right">
+
                             <th:block sec:authorize="isAuthenticated()" th:if="${user.isAdmin() OR user.isAuthor(article)}">
                             <a class="btn btn-success btn-xs" th:href="@{/article/edit/{id}(id = ${article.id})}">Edit</a>
                             <a class="btn btn-danger btn-xs" th:href="@{/article/delete/{id}(id = ${article.id})}">Delete</a>
                             </th:block>
+
                             <a class="btn btn-default btn-xs" th:href="@{/}">back &raquo;</a>
                         </div>
                     </footer>
