@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by Martin on 4/19/2017.

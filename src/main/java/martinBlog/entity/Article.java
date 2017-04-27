@@ -37,16 +37,6 @@ public class Article {
 
     }
 
-    /*  public Article(String title, String content, User author, String imagePath) {
-
-        this.title = title;
-        this.content = content;
-        this.author = author;
-        this.imagePath = imagePath;
-
-        this.date = new Date();
-    } */
-
     public Article(String title, String content, User author, String imagePath, Date date) {
         this.title = title;
         this.content = content;
@@ -118,10 +108,6 @@ public class Article {
     public void setPageView(Integer pageView) {
         this.pageView = pageView;
     }
-
-
-//    public Integer getCounter(){ return this.getPageView(); }
-
     @Transient
     public String getSummary(){
         return this.getContent().substring(0, this.getContent().length() / 2) + "...";

@@ -27,6 +27,14 @@
                         </li>
                     </ul>
                 </th:block>
+                <h4>Most Popular Articles</h4>
+                <th:block th:each="article : ${popularArticles}">
+                    <ul style="list-style-type:bullet">
+                        <li>
+                            <a th:text="${article.title}" th:href="@{/article/{id}(id=${article.id})}"></a>
+                        </li>
+                    </ul>
+                </th:block>
             </div>
         </div>
     </div>
