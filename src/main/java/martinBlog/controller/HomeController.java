@@ -34,8 +34,7 @@ public class HomeController {
         Collections.sort(popularArticles, new Comparator<Article>(){
            public int compare(Article a1, Article a2) {
                return a2.getPageView().compareTo(a1.getPageView());
-           }
-        });
+           }});
         popularArticles = popularArticles.stream().limit(5).collect(Collectors.toList());
 
         model.addAttribute("view","home/index");

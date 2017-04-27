@@ -30,9 +30,7 @@
                     </li>
 
                     <li sec:authorize="isAnonymous()">
-                        <a th:href="@{/register}">
-                            REGISTER
-                        </a>
+                        <a class="btn btn-primary" style="background-color: darkorange" th:href="@{/register}">REGISTER</a>
                     </li>
                     <li sec:authorize="isAnonymous()">
                         <a th:href="@{/login}">

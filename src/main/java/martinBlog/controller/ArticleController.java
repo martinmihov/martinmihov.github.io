@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
